@@ -48,8 +48,6 @@ class LoginController extends Controller
                 $token = array(
                     "iat" => strtotime('now'),   // 签发时间
                     "exp" => strtotime('+1 week'),    // 过期时间 
-                    "username" => $household->username,    // 用户定义数据
-                    'password' => $household->password,
                     "id" => $household->id      // 用户定义数据
                 );
                 // 生成 JWT
@@ -71,36 +69,38 @@ class LoginController extends Controller
         }
     }
     function jwt(Request $req) {
-        // 密钥(自定义)
-        $key = "abcde";
-
         // 要解析的令牌
         $jwt = $req->jwt;
 
         try
         {
-            $data = JWT::decode($jwt, $key, array('HS256'));
-            // 打印解析出来的数据
-            $household = Household::where('username',$data->username)
-            ->where('password','=',$data->password)->first();
+            $jwt = JWT::decode($jwt, "abcde", array('HS256'));
+            // 从数据库中获取用户记录
+            $household = Household::where('id',$jwt->id)->first();
             if($household) {
-                echo '1';
-            } else {
-                echo '403';
+                // 把用户常用的数据保存到SESSION（标记一下、打卡）
+                session([
+                    'id' => $household->id,
+                    'username' => $household->username,
+                    'realname' => $household->realname,
+                    'phone' => $household->phone,
+                    'cardId' => $household->cardId,
+                    'village' => $household->village,
+                    'address' => $household->address,
+                    'contract' => $household->contract //签约费用
+                ]);
+                // 返回成功 200
+                return '200';
             }
-            // var_dump($data);
-            // echo '1';
+            
         }
         catch(  \Firebase\JWT\ExpiredException $e)
         {
-            // var_dump( '过期' );
-            echo '2';
+            return '已过期，请重新登录';
         }
         catch( \Exception $e)
         {
-            // var_dump( '令牌无效' );
-            echo '3';
+            return '令牌无效，请重新登录';
         }
-        // echo '12321';
     }
 }

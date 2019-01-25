@@ -122,7 +122,7 @@
 	</div>
 	<script>
 		var jwt = "{{$jwt}}";
-		if(jwt != null) {
+		if(jwt) {
 		    localStorage.setItem('jwt', jwt);
 		}
 	</script>

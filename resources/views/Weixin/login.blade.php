@@ -42,16 +42,21 @@
 	// var cip = returnCitySN["cip"]+','+returnCitySN["cname"]
 	// localStorage.setItem('cip',returnCitySN['cip'])
 	var jwt = localStorage.getItem('jwt');
-	console.log(jwt)
-	if(jwt != null) {
+	// 自动登录
+	// jwt  登录之前先判断本地存储中是否有令牌
+	/**
+	有就获取令牌传递到后台，没有就什么也不做
+	后台需要判断令牌是否有效，有效登录，无效的话，就提示重新登录
+	 */
+	if(jwt) {
 		var url = "{{route('jwt')}}"+'?jwt='+jwt;
 		$.get(url,function(data){
-			// console.log(data)
-			if(data == 1){
+			if(data === '200'){
 				// 跳转到首页
 				location.href = "{{route('weixin_index')}}";
+
 			} else{
-				alert('用户信息已失效，请重新登录！');
+				alert(data);
 				localStorage.removeItem('jwt');
 			}
 		})
