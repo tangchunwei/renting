@@ -36,26 +36,27 @@ class XzTzController extends Controller
 
     // 续租审核通过
     public function xzStateY($id){
-
+        // 先获取需要审核的记录
         $xuzu = Xuzu::find($id);
+        // 将状态由 审核中 改为 审核通过
         $xuzu->state = '审核通过';
         $xuzu->save();
-
+        // 获取用户记录的end 时间值，再获取用户续租的 时间值
+        // 然后相加
         $household = HouseHold::where(['realname'=>$xuzu->realname,'cardId'=>$xuzu->cardId])
                                 ->first();
-
         if($household){
-
-            $household->time = ($household->time)*1 + ($xuzu->time)*1;
-            $household->end = date("Y-m-d", strtotime("+".$household->time." months", strtotime("".$household->start."")));    
+            // 将到期时间 进行累加，
+            $end_time = date("Y-m-d", strtotime($household->end . "+" . $xuzu->time . "month"));            
+            $household->end = $end_time;
+            // 保存数据
             $household->save();
+
+            // 更改房屋表的到期时间
+            $house = House::where('house_id',$household->address)
+                            ->update(['end_time'=>$end_time]);
+
         }
-
-        $house = House::where('house_id',$household->address)->first();
-
-        $house->end_time = date("Y-m-d", strtotime("+".$household->time." months", strtotime("".$house->start_time."")));    
-        $house->residual_lease = floor((strtotime($house->end_time)-strtotime('now'))/(60*60*24)).'天';
-        $house->save();
 
         return redirect()->route('xuzu');
     }
