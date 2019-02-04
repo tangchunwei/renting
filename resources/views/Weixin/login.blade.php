@@ -14,7 +14,7 @@
 				<div class="main">
 					<img src="/images/weixin/logo.png"/>
 					<input type="text" placeholder="会员账号" name="username" />
-					<input type="password" placeholder="会员密码" name="password" />
+					<input type="text" placeholder="会员密码" name="password" />
                     @if($errors->any())
                         <ul>
                             @foreach($errors->all() as $e)
