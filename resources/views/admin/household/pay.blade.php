@@ -37,7 +37,6 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
 th {
     text-align: center;
 }
-  
 </style>
 </head>
 
@@ -45,38 +44,39 @@ th {
   <!--main_top-->
   <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
-      <td width="99%" align="left" valign="top">您的位置：收费管理 &nbsp;&nbsp;&nbsp;本月</td>
-    </tr>
-    <tr>
-      <td align="left" valign="top">
-
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
-        <tr>
-        <td width="90%" align="left" valign="middle">
-            <form>
-                <span>管理员：</span>
-                
-                <input type="text" name="keyword" value="{{$req->keyword}}" class="text-word">
-                <input name="" type="submit" value="查询" class="text-but">
-                
-            </form>
-          </td>
-        </tr>
-      </table>
+      <td width="99%" align="left" valign="top">当前时间: &nbsp;&nbsp;&nbsp;
+        <input type="month" id="selectMonth" value="{{$date}}" min="2018-01" max="{{$max_date}}" />
       </td>
     </tr>
     <tr>
       <td align="left" valign="top">
-      @if($errors->any())
-      @foreach($errors->all() as $e)
-        <span style='color:red;margin-right:20px;' >{{$e}}</span>
-      @endforeach
-      @endif
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
+          <tr>
+            <td width="90%" align="left" valign="middle">
+              <form>
+                <span>管理员：</span>
+
+                <input type="text" name="keyword" value="{{$req->keyword}}" class="text-word">
+                <input name="" type="submit" value="查询" class="text-but">
+
+              </form>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td align="left" valign="top">
+        @if($errors->any())
+        @foreach($errors->all() as $e)
+        <span style='color:red;margin-right:20px;'>{{$e}}</span>
+        @endforeach
+        @endif
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
           <tr>
             <th align="center" valign="middle" class="borderright">编号</th>
             <th align="center" valign="middle" class="borderright">住户</th>
-            <!-- <th align="center" valign="middle" class="borderright">房屋状态</th> -->
             <th align="center" valign="middle" class="borderright">用户名</th>
             <th align="center" valign="middle" class="borderright">缴费期限</th>
             <th align="center" valign="middle" class="borderright">水费</th>
@@ -92,10 +92,13 @@ th {
             <td align="center" valign="middle" class="borderright borderbottom">{{ $date }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->water }}
               @if($v->water == '')
-              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay" data-attribute="水费" data-id="{{$v->id}}" data-type="water">添加账单</button>
+              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay"
+                data-attribute="水费" data-id="{{$v->id}}" data-type="water">添加账单</button>
               @elseif($v->water_state ==0)
-              <a href="#" class="icon" title="未缴/可修改"  data-toggle="modal" data-target="#updatePay" data-attribute="水费" data-id="{{$v->id}}" data-type="water" data-price="{{$v->water}}"><i class="iconfont icon-bianji"></i></a>
-              <a href="{{route('fixed',['id'=>$v->id,'type'=>'water'])}}" onclick="return confirm('请确定用户已经缴费了吗？')" class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
+              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="水费"
+                data-id="{{$v->id}}" data-type="water" data-price="{{$v->water}}"><i class="iconfont icon-bianji"></i></a>
+              <a href="{{route('fixed',['id'=>$v->id,'type'=>'water'])}}" onclick="return confirm('请确定用户已经缴费了吗？')"
+                class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
 
               @elseif($v->water_state == 1)
               已交
@@ -103,10 +106,13 @@ th {
             </td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->elec }}
               @if($v->elec == '')
-              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay" data-attribute="电费" data-id="{{$v->id}}" data-type="electric">添加账单</button>
+              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay"
+                data-attribute="电费" data-id="{{$v->id}}" data-type="electric">添加账单</button>
               @elseif( $v->elec_state ==0)
-              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="电费" data-id="{{$v->id}}" data-type="electric" data-price="{{$v->elec}}"><i class="iconfont icon-bianji"></i></a>
-              <a href="{{route('fixed',['id'=>$v->id,'type'=>'electric'])}}" onclick="return confirm('请确定用户已经缴费了吗？')" class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
+              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="电费"
+                data-id="{{$v->id}}" data-type="electric" data-price="{{$v->elec}}"><i class="iconfont icon-bianji"></i></a>
+              <a href="{{route('fixed',['id'=>$v->id,'type'=>'electric'])}}" onclick="return confirm('请确定用户已经缴费了吗？')"
+                class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
 
               @elseif($v->elec_state ==1)
               已交
@@ -114,10 +120,13 @@ th {
             </td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->rent }}
               @if($v->rent == '' )
-              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay" data-attribute="房租费" data-id="{{$v->id}}" data-type="rent">添加账单</button>
+              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay"
+                data-attribute="房租费" data-id="{{$v->id}}" data-type="rent">添加账单</button>
               @elseif($v->rent_state ==0)
-              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="房租费" data-id="{{$v->id}}" data-type="rent" data-price="{{$v->rent}}"><i class="iconfont icon-bianji"></i></a>
-              <a href="{{route('fixed',['id'=>$v->id,'type'=>'rent'])}}" onclick="return confirm('请确定用户已经缴费了吗？')" class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
+              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="房租费"
+                data-id="{{$v->id}}" data-type="rent" data-price="{{$v->rent}}"><i class="iconfont icon-bianji"></i></a>
+              <a href="{{route('fixed',['id'=>$v->id,'type'=>'rent'])}}" onclick="return confirm('请确定用户已经缴费了吗？')" class="icon"
+                title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
 
               @elseif($v->rent_state == 1)
               已交
@@ -125,10 +134,13 @@ th {
             </td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->prop }}
               @if($v->prop =='')
-              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay" data-attribute="物业费" data-id="{{$v->id}}" data-type="property">添加账单</button>
+              <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#insertPay"
+                data-attribute="物业费" data-id="{{$v->id}}" data-type="property">添加账单</button>
               @elseif($v->prop_state ==0)
-              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="物业费" data-id="{{$v->id}}" data-type="property" data-price="{{$v->prop}}"><i class="iconfont icon-bianji"></i></a>
-              <a href="{{route('fixed',['id'=>$v->id,'type'=>'property'])}}" onclick="return confirm('请确定用户已经缴费了吗？')" class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
+              <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="物业费"
+                data-id="{{$v->id}}" data-type="property" data-price="{{$v->prop}}"><i class="iconfont icon-bianji"></i></a>
+              <a href="{{route('fixed',['id'=>$v->id,'type'=>'property'])}}" onclick="return confirm('请确定用户已经缴费了吗？')"
+                class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
               @elseif($v->prop_state == 1)
               已交
               @endif
@@ -146,7 +158,7 @@ th {
     </tr>
   </table>
 
-  <form action="{{route('payment.add')}}"  method="post">
+  <form action="{{route('payment.add')}}" method="post">
     <div class="modal fade" id="insertPay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -205,8 +217,8 @@ th {
   <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
   <script>
     var btn = document.querySelectorAll('.btn-default');
-    for(var i of btn) {
-      i.addEventListener('click', function(){
+    for (var i of btn) {
+      i.addEventListener('click', function () {
         // 该this指向的是调用addEventListener的对象
         document.querySelector('#add-name').innerText = this.getAttribute('data-attribute');
         document.querySelector('#add-id').value = this.getAttribute('data-id');
@@ -215,16 +227,22 @@ th {
       })
     }
     var as = document.querySelectorAll('.icon');
-    for(var i of as) {
-      i.addEventListener('click', function(e){  
+    for (var i of as) {
+      i.addEventListener('click', function (e) {
         // 在modal中填充数据
-        document.querySelector('#edit-name').innerText =this.getAttribute('data-attribute');
+        document.querySelector('#edit-name').innerText = this.getAttribute('data-attribute');
         document.querySelector('#edit-id').value = this.getAttribute('data-id');
         document.querySelector('#edit-type').value = this.getAttribute('data-type');
         document.querySelector('#edit-price').value = this.getAttribute('data-price');
         // e.stopPropagation();
       })
     }
+
+    var month = document.querySelector('#selectMonth');
+    month.addEventListener('change', function (e) {
+      // 当时间改变后，重新刷新页面
+      window.location.href = '/admin/payment?date='+this.value
+    })
   </script>
 </body>
 

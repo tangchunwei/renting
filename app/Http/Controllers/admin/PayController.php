@@ -14,24 +14,27 @@ class PayController extends Controller
 {
     //收费管理
     function index(Request $req) {
+        // 定义date
+        $date = $req->date ? $req->date : date('Y-m');
+  
         $db =  DB::table('households')
                     ->select('households.id','username','realname',
                     'rent.money as rent','rent.state as rent_state',
                     'water.money as water','water.state as water_state',
                     'property.money as prop','property.state as prop_state',
                     'electric.money as elec','electric.state as elec_state')
-                    ->leftJoin('rent',function($join) {
+                    ->leftJoin('rent',function($join) use ($date) {
                         $join->on('households.id','=','rent.user_id')
-                                ->where('rent.date','=',date('Y-m'));
-                    })->leftJoin('water',function($join) {
+                                ->where('rent.date','=',$date);
+                    })->leftJoin('water',function($join) use ($date) {
                         $join->on('households.id','=','water.user_id')
-                                ->where('water.date','=',date('Y-m'));
-                    })->leftJoin('property',function($join) {
+                                ->where('water.date','=',$date);
+                    })->leftJoin('property',function($join) use ($date) {
                         $join->on('households.id','=','property.user_id')
-                                ->where('property.date','=',date('Y-m'));
-                    })->leftJoin('electric',function($join) {
+                                ->where('property.date','=',$date);
+                    })->leftJoin('electric',function($join) use ($date) {
                         $join->on('households.id','=','electric.user_id')
-                                ->where('electric.date','=',date('Y-m'));
+                                ->where('electric.date','=',$date);
                     });
         if($req->keyword) {
             $db = $db->where(function($q) use($req){
@@ -47,7 +50,8 @@ class PayController extends Controller
         return view('admin.household.pay',[
             'data' => $data,
             'req' => $req,
-            'date' => date('Y-m')
+            'date' => $date,
+            'max_date' => date('Y-m')
         ]);
     }
 
