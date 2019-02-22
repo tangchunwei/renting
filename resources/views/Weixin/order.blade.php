@@ -40,16 +40,17 @@
 				@elseif($name=='property')
 				物业费
 				@endif</span></div>
-				<!-- <div>收费项<span style="float: right;">0.00</span></div>
-				<div>收费项<span style="float: right;">0.00</span></div> -->
-				<div class="all">总计<span style="float: right;color: red;font-size: 16px;">{{$data->money - $data->cost}}</span></div>
+				<div>手续费<span style="float: right;" title="{{$poundage->toll_item}}">{{$poundage->sum}}</span></div>
+				<!-- <div>收费项<span style="float: right;">0.00</span></div> -->
+				<div class="all">总计<span style="float: right;color: red;font-size: 16px;">{{$total}}</span></div>
 			</div>
 			<input type="hidden" name="cip" id="cip">
 			<input type="hidden" name="number" value="{{$num}}">
 			<input type="hidden" name="type" value="{{$name}}">
+			<input type="hidden" name="service_charge" value="{{$poundage->sum}}">
 			<div class="detail">
 				<label for="">￥</label>
-				<input class="inputs" type="text" name="real_payment" value="{{$data->money - $data->cost}}">
+				<input class="inputs" type="text" name="real_payment" value="{{$total}}">
 
 			</div>
 			</form>

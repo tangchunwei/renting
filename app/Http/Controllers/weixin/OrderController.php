@@ -50,17 +50,24 @@ class OrderController extends Controller
         // elseif($req->type == 'water')
         //     $name = '水费';
         // elseif($req->type == 'electric')
+        // 获取缴费信息
         $data = DB::table($req->type)
-        ->where([
-            ['user_id',session('id')],
-            ['date','=',date('Y-m')],
-        ])
-        ->first();
+            ->where([
+                ['user_id',session('id')],
+                ['date','=',date('Y-m')],
+            ])
+            ->first();
+        // 获取手续费信息
+        $poundage = DB::table('poundage')->where('status','1')->first();
+        
         $num = time();
+        $total = (int)$data->money - (int)$data->cost + (int)$poundage->sum;
         return view('Weixin.order',[
             'data' =>$data,
             'num' => $num,
-            'name' => $req->type
+            'name' => $req->type,
+            'poundage'=>$poundage,
+            'total'=>$total
         ]);
     }
     public function success()
@@ -87,9 +94,10 @@ class OrderController extends Controller
         $model = new Order;
         $model->number = $num;
         $model->user_id = session('id');
-        $model->real_payment = $req->real_payment;
+        $model->real_payment = $req->real_payment;  // 应该缴纳的费用 + 手续费
         $model->type = $req->type;
         $model->state = '0';
+        $model->service_charge = $req->service_charge; // 手续费
         $model->save();
 
         // session('cip',$req->cip);

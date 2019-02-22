@@ -230,6 +230,12 @@ Route::middleware('adminLogin')->group(function () {
     Route::get('/admin/export','admin\ExportController@index')->name('export');
     // 确定已收费
     Route::get('/admin/fixed_charges', 'admin\PayController@fixed')->name('fixed');
+    // 收费管理，用户的历史记录 params $id
+    Route::get('/admin/payment/{id}', 'admin\PayController@info')->name('payment.info');
+
+    // 手续费
+    Route::resource('/admin/pound', 'admin\PoundController');
+    
 });
 
 //后台2

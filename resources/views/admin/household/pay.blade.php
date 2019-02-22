@@ -87,7 +87,9 @@ th {
           @foreach($data as $k=>$v)
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->id }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->realname }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">
+              <a href="/admin/payment/{{$v->id}}">{{ $v->realname }}</a>
+            </td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->username }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $date }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->water }}

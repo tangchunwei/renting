@@ -79,10 +79,11 @@ class WxpayController extends Controller
                     ->where('user_id','=',$order->user_id)
                     ->where('date','=',date('Y-m'))
                     ->first();
-                    $cost = $payTable->cost + $order->real_payment;
+                    // 从相应的缴费中的已支付，加上实际实付，再减去手续费
+                    $cost = (int)$payTable->cost + ((int)$order->real_payment - (int)$order->service_charge);
 
 
-                    Log::debug($cost . '=-----s=' . $payTable->money);
+                    Log::debug('$cost:' . $cost . '， ' . '$payTable->money:' . $payTable->money);
 
 
 
