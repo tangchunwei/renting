@@ -67,17 +67,18 @@ th {
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
           <tr>
             <th align="center" valign="middle" class="borderright">编号</th>
-            <th align="center" valign="middle" class="borderright">金额</th>
+            <th align="center" valign="middle" class="borderright">创建时间</th>
+            <th align="center" valign="middle" class="borderright">订单编号</th>
             <th align="center" valign="middle" class="borderright">已支付</th>
-            <th align="center" valign="middle" class="borderright">缴费期限</th>
             <th align="center" valign="middle" class="borderright">缴费状态</th>
+            <th align="center" valign="middle" class="borderright">服务费</th>
           </tr>
           @foreach($data as $k=>$v)
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->id }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->money }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->cost }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->date }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->updated_at }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->number }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->real_payment }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">
               @if($v->state === 0)
                 <span style="color:red;">未支付</span>  
@@ -85,7 +86,8 @@ th {
                 <span style="color:green;">已支付</span> 
               @endif
             </td>
-      
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->service_charge }}</td>
+            
             <td align="center" valign="middle" class="borderbottom"><span class="gray"></span>
           </tr>
           @endforeach

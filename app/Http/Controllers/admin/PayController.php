@@ -139,7 +139,6 @@ class PayController extends Controller
         $data = DB::table('orders')
                 ->where('user_id', $uid)
                 ->where('type', $key)
-                ->where('state', '1')
                 ->orderBy('updated_at', 'desc')
                 ->get();
         return view('admin.household.info',[
