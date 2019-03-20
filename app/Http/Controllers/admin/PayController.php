@@ -120,18 +120,7 @@ class PayController extends Controller
          * 一个一个表查吧，通过下拉框选择缴费项
          */
         $key = $request->keyword ? $request->keyword : 'rent';
-        // if($request->keyword) {
-        //     $db = $db->where(function($q) use($req){
-        //                     $q->where('households.id','like',"%$req->keyword%")
-        //                         ->orWhere('username','like',"%$req->keyword%")
-        //                         ->orWhere('realname','like',"%$req->keyword%");
-        //                 });
-        // } 
-        // 排除用户名注销的住户
-        // $data = $db->where('address','!=','')
-        //            ->where('households.id',$uid)
-        //            ->get();
-        // $user = Household::select('username','realname')->find($uid);
+   
         $user = DB::table('households')
                 ->select('id','username','realname')
                 ->where('id', $uid)
