@@ -27,7 +27,6 @@
             <td>@if ($v[$i]->type == 'water') {{$v[$i]->real_payment}} @endif</td>
             <td>@if ($v[$i]->type == 'electric'){{$v[$i]->real_payment}} @endif</td>
             <td>@if ($v[$i]->type == 'property') {{$v[$i]->real_payment}} @endif</td>
-            <!-- <td>{{$v[$i]->service_charge}}</td> -->
         </tr>
         @endfor
     </tbody>
