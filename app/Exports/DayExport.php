@@ -18,7 +18,7 @@ class DayExport implements FromView
     }
     public function view(): View
     {
-        $db = DB::select("select h.username,h.realname,o.real_payment,o.created_at,o.type,o.service_charge
+        $db = DB::select("select h.username,h.realname,o.real_payment,o.created_at,o.type
         from  jn_households h join jn_orders o on h.id = o.user_id where username <> '' AND TO_DAYS(o.created_at) = TO_DAYS('$this->day')  ");
         
         // return $data;

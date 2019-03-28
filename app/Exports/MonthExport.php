@@ -18,7 +18,7 @@ class MonthExport implements FromView
     }
     public function view(): View
     {
-        $db = DB::select("select h.username,h.realname,o.real_payment,o.created_at,o.type,o.service_charge
+        $db = DB::select("select h.username,h.realname,o.real_payment,o.created_at,o.type
         from  jn_households h join jn_orders o on h.id = o.user_id where username <> '' AND DATE_FORMAT(o.created_at,'%Y-%m') = '$this->month' order by created_at");
         
         // return $data;
