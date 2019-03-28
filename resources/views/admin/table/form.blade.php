@@ -44,12 +44,12 @@
     <script>
         let day = document.querySelector('#day');
         day.addEventListener('change', function (){
-            location.href = '/admin/dayPayment';
+            location.href = '/admin/dayPayment?day='+this.value;
         })
         
         let month = document.querySelector('#month');
         month.addEventListener('change', function (){
-            location.href = '/admin/monthPayment';
+            location.href = '/admin/monthPayment?month='+this.value;
         })
     </script>
 </body>
