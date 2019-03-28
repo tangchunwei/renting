@@ -61,9 +61,12 @@ th {
                 <input name="" type="submit" value="查询" class="text-but">
 
               </form>
+              <a href="/admin/payment/details" class="btn btn-default" style="float:right;margin-top:3px;">缴费情况</a>
             </td>
+          
           </tr>
         </table>
+       
       </td>
     </tr>
     <tr>

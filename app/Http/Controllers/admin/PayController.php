@@ -136,4 +136,26 @@ class PayController extends Controller
             'user'=>$user,
         ]);
     }
+    public function details(Request $req)
+    {
+        $date = $req->date ? $req->date : date('Y-m');
+        $table = $req->table ? $req->table : 'rent';
+  
+        $db =  DB::table('households')
+                    ->select('households.id','username','realname',$table.'.money',
+                        $table.'.state',$table.'.date',$table.'.cost')
+                    ->leftJoin($table ,function($join) use ($date) {
+                        $join->on('households.id','=','user_id')
+                                ->where('date','=',$date);
+                    });
+        // 排除用户名注销的住户
+        $data = $db->where('address','!=','')
+                ->where('state', 1)
+                ->orderBy('households.id','desc')->get();
+        return view('admin.household.details',[
+            'data' => $data,
+            'date' => $date,
+            'table'=> $table
+        ]);
+    }
 }

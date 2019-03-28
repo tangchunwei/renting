@@ -197,6 +197,7 @@ Route::middleware('adminLogin')->group(function () {
     Route::get('/admin/payment','admin\PayController@index')->name('payment.index');
     Route::post('/admin/payment','admin\PayController@add')->name('payment.add');
     Route::put('/admin/payment','admin\PayController@edit')->name('payment.edit');
+    Route::get('/admin/payment/details', 'admin\PayController@details')->name('details');
 
 
 
