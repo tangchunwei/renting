@@ -228,7 +228,13 @@ Route::middleware('adminLogin')->group(function () {
     Route::post('/admin/download','ExamineController@download')->name('download');
 
     // 房屋报表
+    Route::get('/admin/form',function() {
+        return view('admin.table.form');
+    });
     Route::get('/admin/export','admin\ExportController@index')->name('export');
+    Route::get('/admin/allPayment','admin\ExportController@all');
+    Route::get('/admin/dayPayment','admin\ExportController@day');
+    Route::get('/admin/monthPayment','admin\ExportController@month');
     // 确定已收费
     Route::get('/admin/fixed_charges', 'admin\PayController@fixed')->name('fixed');
     // 收费管理，用户的历史记录 params $id

@@ -45,7 +45,7 @@ class HouseExport implements FromView
         $monthTotal = $month-$contractMonth;
         // 年合计
         $yearTotal = $year-$contractYear;
-        return view('admin.table', [
+        return view('admin.table.table', [
             'month' => $month,
             'year' => $year,
             'contractMonth'=>$contractMonth,
