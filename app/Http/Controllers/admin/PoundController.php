@@ -42,8 +42,15 @@ class PoundController extends Controller
        $validatedData  =  $request->validate([
             'toll_item' => 'required|min:3',
             'sum' => 'required',
-            'status' => 'required'
-        ]);
+            'status' => 'required',
+       ],[
+           'toll_item.required' => '收费项不能为空',
+           'sum.required' => '手续费不能为空',
+           'status.required' => '状态不能为空'
+       ]);
+        if($request->status === '1') {
+            Pound::where('status', 1)->update(['status'=> 0]);
+        }
         Pound::create($request->all());
         return redirect()->route('pound.index');
 
@@ -89,9 +96,9 @@ class PoundController extends Controller
             'sum' => 'required',
             'status' => 'required'
         ]);
-        if($request->status == '1')
+        if($request->status === '1')
         {
-            Pound::where('status','1')->update(['status'=>'0']);
+            Pound::where('status', 1)->update(['status'=> 1]);
         }
         $model = Pound::find($id);
         $model->toll_item = $request->toll_item;

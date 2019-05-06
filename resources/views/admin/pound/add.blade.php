@@ -51,13 +51,15 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
     <form method="post" action="/admin/pound">
     {{ csrf_field() }}
     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
-    @if($errors->has('error'))
-				<span style='color:red'>{{$errors->first('error')}}</span>
-        
-            @endif
-            @if(session('success'))
-            <span style='color:green'>{{session('success')}}</span>
-            @endif
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">收费项：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
@@ -81,10 +83,10 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
         <td align="right" valign="middle" class="borderright borderbottom bggray">状态：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
             <label for="">
-                <input type="radio" name="status" value="0">弃用
+                <input type="radio" name="status" value="0" checked>不使用
             </label>
             <label for="">
-                <input type="radio" name="status" value="1">选中      
+                <input type="radio" name="status" value="1">使用    
             </label>
         </td>
       </tr>
