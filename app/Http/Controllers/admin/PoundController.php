@@ -96,9 +96,8 @@ class PoundController extends Controller
             'sum' => 'required',
             'status' => 'required'
         ]);
-        if($request->status === '1')
-        {
-            Pound::where('status', 1)->update(['status'=> 1]);
+        if($request->status === '1') {
+            Pound::where('status', 1)->update(['status'=> 0]);
         }
         $model = Pound::find($id);
         $model->toll_item = $request->toll_item;

@@ -59,9 +59,12 @@ class OrderController extends Controller
             ->first();
         // 获取手续费信息
         $poundage = DB::table('poundage')->where('status','1')->first();
-        
+      
         $num = time();
-        $total = (int)$data->money - (int)$data->cost + (int)$poundage->sum;
+        $total = (float)$data->money - (float)$data->cost;
+        if($poundage) {
+            $total += (float)$poundage->sum;
+        }
         return view('Weixin.order',[
             'data' =>$data,
             'num' => $num,
