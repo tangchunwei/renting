@@ -80,7 +80,7 @@ class WxpayController extends Controller
                     ->where('date','=',date('Y-m'))
                     ->first();
                     // 从相应的缴费中的已支付，加上实际实付，再减去手续费
-                    $cost = (int)$payTable->cost + ((int)$order->real_payment - (int)$order->service_charge);
+                    $cost = (float)$payTable->cost + ((float)$order->real_payment - (float)$order->service_charge);
 
 
                     Log::debug('$cost:' . $cost . '， ' . '$payTable->money:' . $payTable->money);
