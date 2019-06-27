@@ -22,7 +22,7 @@ class IndexController extends Controller
                 $ishouse='未入住';
             }
             if(date("Y-m-d H:i:s") > "2019-07-05 00:00:00") {
-                return false;
+                return redirect()->route('weixin_login');
             }
             $rent =  Rent::select('money','cost')
             ->where('user_id',session('id'))
