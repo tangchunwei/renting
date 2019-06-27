@@ -21,6 +21,9 @@ class IndexController extends Controller
             }else{
                 $ishouse='未入住';
             }
+            if(date("Y-m-d H:i:s") > "2019-07-05 00:00:00") {
+                return false;
+            }
             $rent =  Rent::select('money','cost')
             ->where('user_id',session('id'))
             ->where('date', date('Y-m'))
