@@ -21,7 +21,7 @@ class IndexController extends Controller
             }else{
                 $ishouse='未入住';
             }
-            if(date("Y-m-d H:i:s") > "2019-07-05 00:00:00") {
+            if(date("Y-m-d H:i:s") > "2019-07-04 00:00:00") {
                 return redirect()->route('weixin_login');
             }
             $rent =  Rent::select('money','cost')
