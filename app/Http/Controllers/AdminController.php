@@ -16,6 +16,7 @@ class AdminController extends Controller
     {
         // $data = Household::find($id);
         $data = Household::where('realname',$req->name)->first();
+        // dump($data);
         return view('admin.show',[
             'data' => $data
         ]);

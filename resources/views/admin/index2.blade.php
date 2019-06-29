@@ -62,7 +62,7 @@
     var options = {
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+            formatter: "{a} <br/>{b}: {c}"
         },
         legend: {
             orient: 'vertical',
@@ -100,7 +100,7 @@
                 radius: ['40%', '55%'],
                 label: {
                     normal: {
-                        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  ',
                         backgroundColor: '#eee',
                         borderColor: '#aaa',
                         borderWidth: 1,
