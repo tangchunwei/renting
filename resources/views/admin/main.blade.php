@@ -87,6 +87,7 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
             <th align="center" valign="middle" class="borderright">缴费情况</th>
             <th align="center" valign="middle" class="borderright">电表号</th>
             <th align="center" valign="middle" class="borderright">水表号</th>
+            <th align="center" valign="middle" class="borderright">折扣</th>
             <th align="center" valign="middle" class="borderright">备注</th>
             <th align="center" valign="middle">操作</th>
           </tr>
@@ -106,6 +107,7 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
             <td align="center" valign="middle" class="borderright borderbottom">已缴：{{ $v->paid }}<br>未缴：{{$v->unpaid}} </td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->electric_meter }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->water_meter }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->discount }}</td>
             <td align="center" valign="middle" class="borderright borderbottom" title="{{ $v->remarks }}">{{ str_limit($v->remarks,11,'...') }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">
               <a href="{{ route('editHousehold',['id'=>$v->id]) }}" target="mainFrame" onFocus="this.blur()" class="add">编辑</a>

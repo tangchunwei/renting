@@ -43,33 +43,42 @@ class IndexController extends Controller
             // 当前月份已经支付的费用
             $arr = ['rent'=>0,'water'=>0,'prop'=>0,'elec'=>0,'jwt'=>$jwt];
             $paid = 0;
+            $unpaid = 0;
+            $payment = 0;
             if($rent) {
                 $arr['rent'] = $rent->money - $rent->cost;
                 $paid += $rent->cost;
+                $unpaid +=  $rent->money;
+                $payment += $rent->cost;
             }
             if($water) {
                 $arr['water'] = $water->money - $water->cost;
                 $paid += $water->cost;
+                $unpaid +=  $water->money;
+                $payment += $water->cost;
             }
             if($prop) {
                 $arr['prop'] = $prop->money - $prop->cost;
                 $paid += $prop->cost;
+                $unpaid +=  $prop->money;
+                $payment += $prop->cost;
             }
             if($elec) {
                 $arr['elec'] = $elec->money - $elec->cost;
                 $paid += $elec->cost;
+                $unpaid +=  $elec->money;
+                $payment += $elec->cost;
             }
             $arr['paid'] = $paid;
             $arr['ishouse'] = $ishouse;
-            // return view('Weixin.index',[
-            //     'ishouse'=>$ishouse,
-            //     'rent' => isset($rent->money)?($rent->money - $rent->cost):'0.00',
-            //     'elec' => isset($elec->money)?($elec->money - $elec->cost):'0.00',
-            //     'prop' => isset($prop->money)?($prop->money - $prop->cost):'0.00',
-            //     'water' => isset($water->money)?($water->money - $water->cost):'0.00',
-            //     'jwt' => $jwt,
-            //     'paid' => $paid
-            // ]);
+            // 是否进行预警
+            $t = date('t'); // 本月一共有几天
+            $d = date('d'); // 当前是第几天
+            if($unpaid > $payment && ($t - $d) < 7) {
+                $arr['iswarn'] = 0;
+            } else {
+                $arr['iswarn'] = 1;
+            }
             return view('Weixin.index', $arr);
     }
     // 地图

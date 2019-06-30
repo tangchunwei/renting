@@ -147,6 +147,15 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
         </td>
       </tr>
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="right" valign="middle" class="borderright borderbottom bggray">折扣：</td>
+        <td align="left" valign="middle" class="borderright borderbottom main-for">
+        <input type="number" name="discount" value="{{ $household->discount }}" class="text-word">
+        @if($errors->has('discount'))
+				  <span style='color:red'>{{$errors->first('discount')}}</span>
+			  @endif
+        </td>
+      </tr>
+      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">备注：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
       

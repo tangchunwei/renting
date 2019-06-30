@@ -16,14 +16,23 @@
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 			}
+
+		.name .warn {
+			background-color: #e51c23;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="top clearfix">
 		<img src="/images/weixin/logo.png" />
-		<div class="name">{{session('realname')}}
-			<span>{{$ishouse}}</span>
+		<div class="name">{{session('realname')}}	
+			<span>{{$ishouse}}</span>  
+			@if($iswarn == 0)
+			<span  onclick="location.href='{{route('order')}}' " class="warn">
+				未缴纳
+			</span>
+			@endif
 		</div>
 		<div class="idnum">&#xe9a7;
 			<span>{{session('cardId')}}</span>

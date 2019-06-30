@@ -224,8 +224,9 @@ class AdminController extends Controller
             return back()->withErrors($validator->errors())->withInput();
         }
         $household = Household::find($id);
-
+    
         $household->fill($req->all());
+        $household->discount = $req->discount;
         $household->password = $req->password;
         $household->time = $req->time."个月";
         $household->end = date("Y-m-d", strtotime("+".$req->time." months", strtotime("".$req->start."")));

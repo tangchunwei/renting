@@ -9,6 +9,7 @@ use App\Model\Water;
 use App\Model\Electric;
 use App\Model\Property;
 use App\Model\Order;
+use App\Model\Household;
 use DB;
 class OrderController extends Controller
 {
@@ -39,7 +40,7 @@ class OrderController extends Controller
             'rent' => $rent,
             'water' => $water,
             'elec' => $elec,
-            'prop' => $prop,
+            'prop' => $prop
         ]);
     }
     public function create(Request $req)
@@ -59,9 +60,12 @@ class OrderController extends Controller
             ->first();
         // 获取手续费信息
         $poundage = DB::table('poundage')->where('status','1')->first();
+        // 获取折扣
+        $household = Household::where('id', session('id'))->select('discount')->first();
+
       
         $num = time();
-        $total = (float)$data->money - (float)$data->cost;
+        $total = (float)$data->money - (float)$data->cost - (float)$household->discount;
         if($poundage) {
             $total += (float)$poundage->sum;
         }
@@ -70,8 +74,10 @@ class OrderController extends Controller
             'num' => $num,
             'name' => $req->type,
             'poundage'=>$poundage,
-            'total'=>$total
+            'total'=>$total,
+            'discount' => $household->discount
         ]);
+
     }
     public function success()
     {
@@ -100,6 +106,7 @@ class OrderController extends Controller
         $model->type = $req->type;
         $model->state = '0';
         $model->service_charge = $req->service_charge; // 手续费
+        $model->discount = $req->discount;
         $model->save();
 
         // session('cip',$req->cip);
