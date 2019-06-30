@@ -49,36 +49,7 @@ th {
 <body>
   <!--main_top-->
   <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
-    <tr>
-      <td width="99%" align="left" valign="top">当前时间: &nbsp;&nbsp;&nbsp;
-        <input type="month" id="selectMonth" value="{{$date}}" min="2018-01" max="{{$max_date}}" />
-      </td>
-    </tr>
-    <tr>
-      <td align="left" valign="top">
-
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
-          <tr>
-            <td width="90%" align="left" valign="middle">
-              <form>
-                <span>管理员：</span>
-
-                <input type="text" name="keyword" value="{{$req->keyword}}" class="text-word">
-                <input name="" type="submit" value="查询" class="text-but">
-
-              </form>
-              
-              <a href="/admin/payment/details" class="btn btn-default" style="float:right;margin-top:3px;">缴费情况</a>
-              @if($warning == 0)
-              <a href="{{route('warning')}}" class="btn btn-danger warning-btn">未缴纳</a>
-              @endif
-            </td>
-          
-          </tr>
-        </table>
-       
-      </td>
-    </tr>
+    
     <tr>
       <td align="left" valign="top">
         @if($errors->any())

@@ -43,6 +43,41 @@ class PayController extends Controller
                                 ->orWhere('realname','like',"%$req->keyword%");
                         });
         } 
+        $date = date('Y-m');
+        // 分别从缴费表中查询记录，只要查询到一条，即本月还有没有缴费的用户，显示 未缴纳 按钮
+        $pay = Rent::where([
+            ['state','=','0'],
+            ['date','=',$date],
+        ])->first();
+        if(!$pay) {
+            $pay = Water::where([
+                ['state','=','0'],
+                ['date','=',$date],
+            ])->first();
+            if(!$pay){
+                $pay = Electric::where([
+                    ['state','=','0'],
+                    ['date','=',$date],
+                ])->first();
+                if(!$pay) {
+                    $pay = Property::where([
+                        ['state','=','0'],
+                        ['date','=',$date],
+                    ])->first();
+                }
+            }
+            
+            
+        }
+       
+        $t = date('t'); // 本月一共有几天
+        $d = date('d'); // 当前是第几天
+        if($pay && ($t - $d) < 7) {
+            $warning = 0;
+        } else {
+            $warning = 1;
+        }
+        
         // 排除用户名注销的住户
         $data = $db->where('address','!=','')
                    ->orderBy('households.id','desc')->paginate(15);
@@ -51,7 +86,8 @@ class PayController extends Controller
             'data' => $data,
             'req' => $req,
             'date' => $date,
-            'max_date' => date('Y-m')
+            'max_date' => date('Y-m'),
+            'warning' => $warning
         ]);
     }
 
@@ -156,6 +192,54 @@ class PayController extends Controller
             'data' => $data,
             'date' => $date,
             'table'=> $table
+        ]);
+    }
+
+    // 预警
+    function warning(Request $req) {
+        // 定义date
+        $date = $req->date ? $req->date : date('Y-m');
+  
+        $data =  DB::table('households')
+                    ->select('households.id','username','realname',
+                    'rent.money as rent','rent.state as rent_state',
+                    'water.money as water','water.state as water_state',
+                    'property.money as prop','property.state as prop_state',
+                    'electric.money as elec','electric.state as elec_state')
+                    ->leftJoin('rent',function($join) use ($date) {
+                        $join->on('households.id','=','rent.user_id')
+                                ->where('rent.date','=',$date);
+
+                    })->leftJoin('water',function($join) use ($date) {
+                        $join->on('households.id','=','water.user_id')
+                                ->where('water.date','=',$date);
+
+                    })->leftJoin('property',function($join) use ($date) {
+                        $join->on('households.id','=','property.user_id')
+                                ->where('property.date','=',$date);
+
+                    })->leftJoin('electric',function($join) use ($date) {
+                        $join->on('households.id','=','electric.user_id')
+                                ->where('electric.date','=',$date);
+
+                    })
+                    ->where('address','!=','') // 排除用户名注销的住户
+                    ->where(function ($query) {       
+                        $query->where('rent.state','=', 0)
+                              ->orWhere('water.state','=', 0)
+                              ->orWhere('property.state','=', 0)
+                              ->orWhere('electric.state','=', 0);
+                    })
+                    ->orderBy('households.id','desc')
+                    ->paginate(15);
+                    // ->get();
+ 
+    
+        return view('admin.payment.warning',[
+            'data' => $data,
+            'req' => $req,
+            'date' => $date,
+            'max_date' => date('Y-m'),
         ]);
     }
 }

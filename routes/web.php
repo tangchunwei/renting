@@ -198,6 +198,8 @@ Route::middleware('adminLogin')->group(function () {
     Route::post('/admin/payment','admin\PayController@add')->name('payment.add');
     Route::put('/admin/payment','admin\PayController@edit')->name('payment.edit');
     Route::get('/admin/payment/details', 'admin\PayController@details')->name('details');
+    // 预警
+    Route::get('/admin/payment/warning', 'admin\PayController@warning')->name('warning');
 
 
 
