@@ -12,15 +12,6 @@ use DB;
 use Validator;
 class AdminController extends Controller
 {
-    public function show(Request $req)
-    {
-        // $data = Household::find($id);
-        $data = Household::where('realname',$req->name)->first();
-        // dump($data);
-        return view('admin.show',[
-            'data' => $data
-        ]);
-    }
     public function index2()
     {
         $data = Village::all();

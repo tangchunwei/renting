@@ -76,7 +76,7 @@ Route::middleware('adminLogin')->group(function () {
     Route::get('/admin/repair/edit','RepairController@edit')->name('repair.edit');
     // 房屋图表
     Route::get('/admin/index2','AdminController@index2')->name('index');
-    Route::get('/admin/show','AdminController@show')->name('show');
+    Route::get('/admin/show','admin\HouseController@show')->name('show');
     // 后台主页开始
     Route::get('/admin/index','AdminController@index')->name('admin_index');
     Route::get('/admin/indexTop','AdminController@indexTop');
