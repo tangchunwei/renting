@@ -31,8 +31,9 @@ class XuzuRequest extends FormRequest
             ],
             'phone'=>[
                 ' required ',
-                ' size:11',
-                'regex:/((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}/'
+                // ' size:11',
+                'between:7,11'
+                // 'regex:/((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}/'
             ],
             'address'=>'required',
             'village'=>'required'
@@ -43,7 +44,7 @@ class XuzuRequest extends FormRequest
 
         return [
             'phone.required'=>'手机号 不能为空',
-            'phone.size'=>'手机号为11位',
+            'phone.between'=>'手机号长度不对',
 
             'realname.required'=>'姓名 不能为空',
 

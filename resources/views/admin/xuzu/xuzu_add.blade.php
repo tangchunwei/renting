@@ -101,6 +101,15 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
 			  @endif
         </td>
         </tr>
+      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+        <td align="right" valign="middle" class="borderright borderbottom bggray">缴费标准：</td>
+        <td align="left" valign="middle" class="borderright borderbottom main-for">
+        <input type="text" name="rent" value="" class="text-word">
+        @if($errors->has('rent'))
+				  <span style='color:red'>{{$errors->first('rent')}}</span> 
+			  @endif
+        </td>
+      </tr>
      
 
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">

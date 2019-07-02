@@ -10,6 +10,7 @@ use App\Model\Tuizu;
 use App\Model\House;
 use App\Http\Requests\XuzuRequest;
 
+
 class XzTzController extends Controller
 {
     //续租
@@ -95,6 +96,11 @@ class XzTzController extends Controller
         $xuzu->flow_number = date("Ymdhis");
 
         $xuzu->save();
+
+        if($rent = $req->rent) {
+            House::where('house_id','=',$req->address)->update(['rent'=>$rent]);
+
+        }
         return redirect()->route('xuzu');
     }
 
@@ -129,6 +135,10 @@ class XzTzController extends Controller
                             $xuzu->flow_number = date("Ymdhis");
 
                             $xuzu->save();
+                            if($rent = $req->rent) {
+                                House::where('house_id','=',$req->address)->update(['rent'=>$rent]);
+    
+                            }
                             return redirect()->route('xuzu');
                         }
                     }
@@ -185,6 +195,7 @@ class XzTzController extends Controller
         $tuizu->flow_number = date("Ymdhis");
 
         $tuizu->save();
+        
         return redirect()->route('tuizu');
     }
 
