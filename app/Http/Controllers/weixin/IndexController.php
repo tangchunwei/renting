@@ -24,57 +24,50 @@ class IndexController extends Controller
             if(date("Y-m-d H:i:s") > "2019-07-20 00:00:00") {
                 return redirect()->route('weixin_login');
             }
-            $rent =  Rent::select('money','cost')
-            ->where('user_id',session('id'))
-            ->where('date', date('Y-m'))
-            ->first();
+            $user_id = session('id');
+            $rent =  Rent::select('id','money','cost')
+            ->where('user_id',$user_id)
+            ->get();
+            // dump($user_id);die;
             $elec = Electric::select('money','cost')
-            ->where('user_id',session('id'))
-            ->where('date', date('Y-m'))
-            ->first();
+            ->where('user_id',$user_id)
+            ->get();
             $prop = Property::select('money','cost')
-            ->where('user_id',session('id'))
-            ->where('date', date('Y-m'))
-            ->first();
+            ->where('user_id',$user_id)
+            ->get();
             $water = Water::select('money','cost')
-            ->where('user_id',session('id'))
-            ->where('date', date('Y-m'))
-            ->first();
+            ->where('user_id',$user_id)
+            ->get();
             // 当前月份已经支付的费用
             $arr = ['rent'=>0,'water'=>0,'prop'=>0,'elec'=>0,'jwt'=>$jwt];
             $paid = 0;
             $unpaid = 0;
-            $payment = 0;
-            if($rent) {
-                $arr['rent'] = $rent->money - $rent->cost;
-                $paid += $rent->cost;
-                $unpaid +=  $rent->money;
-                $payment += $rent->cost;
+            foreach($rent as $k => $v) {
+                $arr['rent'] += $v->money - $v->cost;
+                $paid += $v->cost;
+                $unpaid +=  $v->money;
             }
-            if($water) {
-                $arr['water'] = $water->money - $water->cost;
-                $paid += $water->cost;
-                $unpaid +=  $water->money;
-                $payment += $water->cost;
+            foreach($water as $k => $v) {
+                $arr['water'] += $v->money - $v->cost;
+                $paid += $v->cost;
+                $unpaid +=  $v->money;
             }
-            if($prop) {
-                $arr['prop'] = $prop->money - $prop->cost;
-                $paid += $prop->cost;
-                $unpaid +=  $prop->money;
-                $payment += $prop->cost;
+            foreach($prop as $k => $v) {
+                $arr['prop'] += $v->money - $v->cost;
+                $paid += $v->cost;
+                $unpaid +=  $v->money;
             }
-            if($elec) {
-                $arr['elec'] = $elec->money - $elec->cost;
-                $paid += $elec->cost;
-                $unpaid +=  $elec->money;
-                $payment += $elec->cost;
+            foreach($elec as $k => $v) {
+                $arr['elec'] += $v->money - $v->cost;
+                $paid += $v->cost;
+                $unpaid +=  $v->money;
             }
             $arr['paid'] = $paid;
             $arr['ishouse'] = $ishouse;
             // 是否进行预警
             $t = date('t'); // 本月一共有几天
             $d = date('d'); // 当前是第几天
-            if($unpaid > $payment && ($t - $d) < 7) {
+            if($unpaid > $paid && ($t - $d) < 7) {
                 $arr['iswarn'] = 0;
             } else {
                 $arr['iswarn'] = 1;

@@ -15,27 +15,23 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $date = date('Y-m');
+        $user_id = session('id');
         $rent = Rent::where([
-            ['user_id','=', session('id')],
+            ['user_id','=', $user_id],
             ['state','=','0'],
-            ['date','=',$date],
-        ])->first();
+        ])->get();
         $water = Water::where([
-            ['user_id','=', session('id')],
+            ['user_id','=', $user_id],
             ['state','=','0'],
-            ['date','=',$date],
-        ])->first();
+        ])->get();
         $elec = Electric::where([
-            ['user_id','=', session('id')],
+            ['user_id','=', $user_id],
             ['state','=','0'],
-            ['date','=',$date],
-        ])->first();
+        ])->get();
         $prop = Property::where([
-            ['user_id','=', session('id')],
+            ['user_id','=', $user_id],
             ['state','=','0'],
-            ['date','=',$date],
-        ])->first();
+        ])->get();
         return view('Weixin.month',[
             'rent' => $rent,
             'water' => $water,
@@ -52,11 +48,8 @@ class OrderController extends Controller
         //     $name = '水费';
         // elseif($req->type == 'electric')
         // 获取缴费信息
-        $data = DB::table($req->type)
-            ->where([
-                ['user_id',session('id')],
-                ['date','=',date('Y-m')],
-            ])
+        $data = DB::table($req->table)
+            ->where('id', $req->id)
             ->first();
         // 获取手续费信息
         $poundage = DB::table('poundage')->where('status','1')->first();

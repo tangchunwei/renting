@@ -74,7 +74,7 @@
 	</div>
 	<!--本月清单-->
 	<div class="myorder">
-		<span>&#xe703;</span>本月清单
+		<span>&#xe703;</span>费用清单
 		<span style="float: right;">&#xe602;</span>
 	</div>
 	<div class="orderdetail">

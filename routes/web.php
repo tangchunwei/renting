@@ -50,7 +50,7 @@ Route::get('/fanxinzhanshi1','weixin\IndexController@fanxinzhanshi1')->name('wei
 Route::get('/test','weixin\TestController@index')->name('weixin_test');
 // 订单页
 Route::get('/order','weixin\OrderController@index')->name('order');
-Route::post('/order','weixin\OrderController@create')->name('order.create');
+Route::get('/order/create','weixin\OrderController@create')->name('order.create');
 Route::get('/orderSuccess','weixin\OrderController@success')->name('order.success');
 Route::get('/order/test','weixin\OrderController@test')->name('order.test');
 Route::post('/order/store','weixin\OrderController@store')->name('order.test');

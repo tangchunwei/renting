@@ -11,76 +11,72 @@
 
 <body>
 	<div class="wrap">
-		<div class="title">我的本月清单</div>
+		<div class="title">我的费用清单</div>
 		<div class="tips">请选择要支付的账单</div>
-		<form action="/order" id="form" method="post">
-			{{csrf_field()}}
-			@if($rent != '')
-			<div class="list">
-				<label class="item clearfix">
-					<input type="radio" name="type" value="{{$rent->table}}">房租
-					<small>未支付</small>
-					<span style="color: red;float: right;font-size: 16px;">{{$rent->money - $rent->cost}}</span>
-				</label>
-			</div>
-			@endif
-			@if($water != '')
-			<div class="list">
-				<label class="item clearfix">
 
-					<input type="radio" name="type" value="{{$water->table}}">水费
-					<small>未支付</small>
-					<span style="color: red;float: right;font-size: 16px;">{{$water->money - $water->cost}}</span>
-
-				</label>
-			</div>
-			@endif
-			@if($elec != '')
-			<div class="list">
-
-
-
-				<label class="item clearfix">
-
-					<input type="radio" name="type" value="{{$elec->table}}">电费
-					<small>未支付</small>
-
-					<span style="color: red;float: right;font-size: 16px;">{{$elec->money - $elec->cost}}</span>
-				</label>
-
-
-			</div>
-			@endif
-			@if($prop != '')
-			<div class="list">
-				<label class="item clearfix">
-
-					<input type="radio" name="type" value="{{$prop->table}}">物业费
-					<small>未支付</small>
-					<span style="color: red;float: right;font-size: 16px;">{{$prop->money - $prop->cost}}</span>
-
-				</label>
-			</div>
-			@endif
-		</form>
+		@foreach($rent as $k => $v)
+		<div class="list" data-id="{{$v->id}}" data-table="rent">
+			<label class="item clearfix">
+				<!-- <input type="radio" name="type" value="">房租 {{$v->date}} -->
+				{{$v->date}}&nbsp;房租
+				<small>未支付</small>
+				<span style="color: red;float: right;font-size: 16px;">{{$v->money - $v->cost}}</span>
+			</label>
+		</div>
+		@endforeach
+		@foreach($water as $k => $v)
+		<div class="list" data-id="{{$v->id}}" data-table="water">
+			<label class="item clearfix">
+				<!-- <input type="radio" name="type" value="">房租 {{$v->date}} -->
+				{{$v->date}}&nbsp;水费
+				<small>未支付</small>
+				<span style="color: red;float: right;font-size: 16px;">{{$v->money - $v->cost}}</span>
+			</label>
+		</div>
+		@endforeach
+		@foreach($elec as $k => $v)
+		<div class="list" data-id="{{$v->id}}" data-table="elec">
+			<label class="item clearfix">
+				<!-- <input type="radio" name="type" value="">房租 {{$v->date}} -->
+				{{$v->date}}&nbsp;电费
+				<small>未支付</small>
+				<span style="color: red;float: right;font-size: 16px;">{{$v->money - $v->cost}}</span>
+			</label>
+		</div>
+		@endforeach
+		@foreach($prop as $k => $v)
+		<div class="list" data-id="{{$v->id}}" data-table="prop">
+			<label class="item clearfix">
+				<!-- <input type="radio" name="type" value="">房租 {{$v->date}} -->
+				{{$v->date}}&nbsp;物业费
+				<small>未支付</small>
+				<span style="color: red;float: right;font-size: 16px;">{{$v->money - $v->cost}}</span>
+			</label>
+		</div>
+		@endforeach
 
 	</div>
-	<div class="handle">
 
-		<div style="width:100%;background-color: #E51C23;" onclick="subform()">确定</div>
-	</div>
 </body>
 
 </html>
-<script src="/js/weixin/jquery-3.2.1.min.js"></script>
 <script>
-	var form = document.getElementById('form');
-	function subform() {
-		if ($(":radio:checked").length == 0) {
-			alert('请选择缴费项')
-		}
-		else {
-			form.submit();
-		}
-	}
+	// var form = document.getElementById('form');
+	// function subform() {
+	// 	if ($(":radio:checked").length == 0) {
+	// 		alert('请选择缴费项')
+	// 	}
+	// 	else {
+	// 		form.submit();
+	// 	}
+	// }
+	let divs = document.querySelectorAll('.list');
+	divs.forEach(div => {
+		div.addEventListener('click', function(){
+			window.location.href = '/order/create?id='+this.dataset.id+'&table='+this.dataset.table;
+		})
+	})
+	// div.addEventListener('click', function(){
+	// 	console.log(this.dataset);
+	// })
 </script>
