@@ -197,7 +197,10 @@ Route::middleware('adminLogin')->group(function () {
     Route::get('/admin/payment','admin\PayController@index')->name('payment.index');
     Route::post('/admin/payment','admin\PayController@add')->name('payment.add');
     Route::put('/admin/payment','admin\PayController@edit')->name('payment.edit');
+    Route::get('/admin/payment/del','admin\PayController@delete')->name('payment.del');
     Route::get('/admin/payment/details', 'admin\PayController@details')->name('details');
+     // 收费管理，用户的历史记录 params $id
+     Route::get('/admin/payment/{id}', 'admin\PayController@info')->name('payment.info');
     // 预警
     Route::get('/admin/payment/warning', 'admin\PayController@warning')->name('warning');
 
@@ -239,8 +242,7 @@ Route::middleware('adminLogin')->group(function () {
     Route::get('/admin/monthPayment','admin\ExportController@month');
     // 确定已收费
     Route::get('/admin/fixed_charges', 'admin\PayController@fixed')->name('fixed');
-    // 收费管理，用户的历史记录 params $id
-    Route::get('/admin/payment/{id}', 'admin\PayController@info')->name('payment.info');
+   
 
     // 手续费
     Route::resource('/admin/pound', 'admin\PoundController');

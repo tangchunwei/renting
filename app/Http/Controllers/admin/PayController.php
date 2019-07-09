@@ -135,6 +135,11 @@ class PayController extends Controller
         ->update(['money'=>$req->price]);
         return back();
     }
+    // 删除
+    public function delete(Request $req) {
+        DB::table($req->table)->where('id', $req->id)->delete();
+        return back();
+    }
     function fixed(Request $req){
         // 先根据类型和id查找数据
         $model = DB::table($req->type)
@@ -161,10 +166,9 @@ class PayController extends Controller
                 ->select('id','username','realname')
                 ->where('id', $uid)
                 ->first();
-        $data = DB::table('orders')
+        $data = DB::table($key)
                 ->where('user_id', $uid)
-                ->where('type', $key)
-                ->orderBy('updated_at', 'desc')
+                ->orderBy('date', 'desc')
                 ->get();
         return view('admin.household.info',[
             'data' => $data,

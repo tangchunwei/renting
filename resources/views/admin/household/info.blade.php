@@ -56,7 +56,7 @@ th {
       <option value="property" @if($key === 'property') selected @endif>物业费</option>
       <option value="water" @if($key === 'water') selected @endif>水费</option>
     </select>
-    <a href="javaScript:;" onClick="javascript :history.back(-1);" class="btn btn-default">返回</a>
+    <a href="{{ route('payment.index')}}" class="btn btn-default">返回列表</a>
   </div>
 </h3>
 
@@ -64,31 +64,32 @@ th {
   <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
       <td align="left" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
           <tr>
             <th align="center" valign="middle" class="borderright">编号</th>
-            <th align="center" valign="middle" class="borderright">创建时间</th>
-            <th align="center" valign="middle" class="borderright">订单编号</th>
-            <th align="center" valign="middle" class="borderright">已支付</th>
-            <th align="center" valign="middle" class="borderright">缴费状态</th>
-            <th align="center" valign="middle" class="borderright">服务费</th>
+            <th align="center" valign="middle" class="borderright">缴费期限</th>
+            <th align="center" valign="middle" class="borderright">总费用</th>
+            <th align="center" valign="middle" class="borderright">已缴纳</th>
+            <th align="center" valign="middle" class="borderright">缴纳状态</th>
+            <th align="center" valign="middle">操作</th>
           </tr>
           @foreach($data as $k=>$v)
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->id }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->updated_at }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->number }}</td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->real_payment }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->date }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->money }}</td>
+            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->cost }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">
               @if($v->state === 0)
-                <span style="color:red;">未支付</span>  
+              <button class="btn btn-warning btn-xs">未缴纳  </button>
               @elseif($v->state === 1)
-                <span style="color:green;">已支付</span> 
-              @endif
+              <button class="btn btn-success btn-xs">已缴纳  </button>
+              @endif 
             </td>
-            <td align="center" valign="middle" class="borderright borderbottom">{{ $v->service_charge }}</td>
-            
-            <td align="center" valign="middle" class="borderbottom"><span class="gray"></span>
+            <td align="center" valign="middle" class="borderbottom">
+              <!-- <a href="" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span> -->
+              <a href="{{ route('payment.del',['id'=>$v->id, 'table'=>$key]) }}" onclick="return confirm('确定要删除吗？')" target="mainFrame" onFocus="this.blur()" class="add">删除</a>
+            </td>
           </tr>
           @endforeach
         </table>

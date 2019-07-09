@@ -114,7 +114,6 @@ th {
                 data-id="{{$v->id}}" data-type="water" data-price="{{$v->water}}"><i class="iconfont icon-bianji"></i></a>
               <a href="{{route('fixed',['id'=>$v->id,'type'=>'water'])}}" onclick="return confirm('请确定用户已经缴费了吗？')"
                 class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
-
               @elseif($v->water_state == 1)
               已交
               @endif
@@ -258,6 +257,7 @@ th {
       // 当时间改变后，重新刷新页面
       window.location.href = '/admin/payment?date='+this.value
     })
+    
   </script>
 </body>
 
