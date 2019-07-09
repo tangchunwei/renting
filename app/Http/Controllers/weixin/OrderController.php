@@ -65,7 +65,7 @@ class OrderController extends Controller
         return view('Weixin.order',[
             'data' =>$data,
             'num' => $num,
-            'name' => $req->type,
+            'name' => $req->table,
             'poundage'=>$poundage,
             'total'=>$total,
             'discount' => $household->discount
