@@ -21,7 +21,7 @@ class IndexController extends Controller
             }else{
                 $ishouse='未入住';
             }
-            if(date("Y-m-d H:i:s") > "2019-07-20 00:00:00") {
+            if(date("Y-m-d H:i:s") > "2019-07-22 00:00:00") {
                 return redirect()->route('weixin_login');
             }
             $user_id = session('id');

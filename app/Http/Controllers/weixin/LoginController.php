@@ -50,7 +50,7 @@ class LoginController extends Controller
                     "exp" => strtotime('+1 week'),    // 过期时间 
                     "id" => $household->id      // 用户定义数据
                 );
-                if(date("Y-m-d H:i:s") > "2019-07-20 00:00:00") {
+                if(date("Y-m-d H:i:s") > "2019-07-22 00:00:00") {
                     return redirect()->route('weixin_login');
                 }
                 // 生成 JWT

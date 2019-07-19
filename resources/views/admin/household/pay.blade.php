@@ -51,7 +51,7 @@ th {
   <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
       <td width="99%" align="left" valign="top">当前时间: &nbsp;&nbsp;&nbsp;
-        <input type="month" id="selectMonth" value="{{$date}}" min="2018-01" max="{{$max_date}}" />
+        <input type="month" id="selectMonth" value="{{$date}}" min="2018-01" />
       </td>
     </tr>
     <tr>

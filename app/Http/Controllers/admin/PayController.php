@@ -43,7 +43,6 @@ class PayController extends Controller
                                 ->orWhere('realname','like',"%$req->keyword%");
                         });
         } 
-        $date = date('Y-m');
         // 分别从缴费表中查询记录，只要查询到一条，即本月还有没有缴费的用户，显示 未缴纳 按钮
         $pay = Rent::where([
             ['state','=','0'],
