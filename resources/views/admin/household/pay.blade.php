@@ -113,7 +113,7 @@ th {
               <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="水费"
                 data-id="{{$v->id}}" data-type="water" data-price="{{$v->water}}"><i class="iconfont icon-bianji"></i></a>
               <a href="{{route('fixed',['id'=>$v->id,'type'=>'water'])}}" onclick="return confirm('请确定用户已经缴费了吗？')"
-                class="icon" title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
+                class="icon" title="确定缴费">已交</a>
               @elseif($v->water_state == 1)
               已交
               @endif
@@ -140,7 +140,7 @@ th {
               <a href="#" class="icon" title="未缴/可修改" data-toggle="modal" data-target="#updatePay" data-attribute="房租费"
                 data-id="{{$v->id}}" data-type="rent" data-price="{{$v->rent}}"><i class="iconfont icon-bianji"></i></a>
               <a href="{{route('fixed',['id'=>$v->id,'type'=>'rent'])}}" onclick="return confirm('请确定用户已经缴费了吗？')" class="icon"
-                title="确定缴费"><i class="iconfont icon-xiayibu"></i></a>
+                title="确定缴费"><i class="iconfont icon-shezhi"></i></a>
 
               @elseif($v->rent_state == 1)
               已交
