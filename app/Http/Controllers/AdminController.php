@@ -23,7 +23,8 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    public function admin_doLogin(Request $req){
+    public function admin_doLogin(Request $req)
+    {
         $admin = Admin::where('name',$req->name)
         ->leftJoin('jurisdics as b','admins.jurisdiction','=','b.id' )
         ->first();
