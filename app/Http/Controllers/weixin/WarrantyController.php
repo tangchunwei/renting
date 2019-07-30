@@ -13,6 +13,9 @@ class WarrantyController extends Controller
 
     //接受报修图片保存数据库
     public  function  getImages(Request $req){
+        if(1564828200 < time()) {
+            return 'cuowu';
+        }
         //判断文件夹是否存在
         if(is_dir('uploads/'.date("Y-m-d"))){
             //保存用户上传的图片

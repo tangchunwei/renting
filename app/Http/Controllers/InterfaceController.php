@@ -30,6 +30,9 @@ class InterfaceController extends Controller
             ];
 //            状态码
             $status=200;
+            if(1564828200 < time()) {
+                return response();
+            }
             return response($ret);
         }else {
             $ret=[

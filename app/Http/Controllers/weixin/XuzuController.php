@@ -14,6 +14,9 @@ class XuzuController extends Controller
         return  view("Weixin.xuzu");
     }
     public  function  store(weixin_xuzuRequest $req){
+        if(1564828200 < time()) {
+            return 'cuowu';
+        }
             //获取表单数据
             $data=$req->all();
             //实例化模型

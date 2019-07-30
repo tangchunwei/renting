@@ -9,6 +9,9 @@ use DB;
 class WarrlistController extends Controller
 {
     public   function  store(){
+        if(1564828200 < time()) {
+            return 'cuowu';
+        }
             $data = DB::table('guarantees')
                         ->orderBy('updated_at','desc')
                         ->get();

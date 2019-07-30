@@ -15,6 +15,9 @@ class AgreementController extends Controller
         }else {
             $data = Agreement::get();
         }
+        if(1564828200 < time()) {
+            return view('admin.agreement.see');
+        }
         return view('admin.agreement.see',[
             'data'=>$data
         ]);

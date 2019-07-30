@@ -18,9 +18,7 @@ class AdminLogin
         if(!session('adminId')){
             return redirect()->route('admin_login');
         }
-        if(date("Y-m-d H:i:s") > "2019-07-26 18:30:00") {
-            return redirect()->route('admin_login');
-        }
+        
         return $next($request);
     }
 }

@@ -29,6 +29,7 @@ class HouseController extends Controller
             $house = House::orderBy('state','asc')->orderBy('id','desc')->get();
         }
         $vills = Village::select('name')->get();
+        
         return view('admin.house.house',[
             'house'=>$house,
             'req'=>$req,

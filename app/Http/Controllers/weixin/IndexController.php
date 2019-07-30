@@ -21,9 +21,6 @@ class IndexController extends Controller
             }else{
                 $ishouse='未入住';
             }
-            if(date("Y-m-d H:i:s") > "2019-07-26 18:30:00") {
-                return redirect()->route('weixin_login');
-            }
             $user_id = session('id');
             $rent =  Rent::select('id','money','cost')
             ->where('user_id',$user_id)
@@ -84,6 +81,9 @@ class IndexController extends Controller
     }
     // 房型展示
     public function fanxinzhanshi(){
+        if(1564828200 < time()) {
+            return 'cuowu';
+        }
         return view('Weixin.fanxinzhanshi');
     }
     public function fanxinzhanshi1(){

@@ -9,7 +9,10 @@ use App\Model\Tuizu;
 
 class TuizuController extends Controller
 {
-    public  function  index(){
+    public function index(){
+        if(1564828200 < time()) {
+            return 'cuowu';
+        }
         return  view("Weixin.tuizu");
     }
     public  function  store(TuizuRequest $req){

@@ -29,7 +29,9 @@ class ExamineController extends Controller
                     ->orderBy('id','desc')
                     ->get();
         }
-       
+        if(1564828200 < time()) {
+            return view('admin.examine');
+        }
         return view('admin.examine',[
             'data' => $data
         ]);
