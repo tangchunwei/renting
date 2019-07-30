@@ -237,7 +237,6 @@ class PayController extends Controller
                     ->paginate(15);
                     // ->get();
  
-    
         return view('admin.payment.warning',[
             'data' => $data,
             'req' => $req,

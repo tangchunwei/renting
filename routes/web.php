@@ -200,9 +200,10 @@ Route::middleware('adminLogin')->group(function () {
     Route::get('/admin/payment/del','admin\PayController@delete')->name('payment.del');
     Route::get('/admin/payment/details', 'admin\PayController@details')->name('details');
      // 收费管理，用户的历史记录 params $id
-     Route::get('/admin/payment/{id}', 'admin\PayController@info')->name('payment.info');
+     Route::get('/admin/payment_info/{id}', 'admin\PayController@info')->name('payment.info');
     // 预警
     Route::get('/admin/payment/warning', 'admin\PayController@warning')->name('warning');
+    
 
 
 

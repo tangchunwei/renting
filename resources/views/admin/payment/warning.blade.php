@@ -199,37 +199,7 @@ th {
       </div>
     </div>
   </form>
-  <script src="/vendor/jquery/jquery.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script>
-    var btn = document.querySelectorAll('.btn-default');
-    for (var i of btn) {
-      i.addEventListener('click', function () {
-        // 该this指向的是调用addEventListener的对象
-        document.querySelector('#add-name').innerText = this.getAttribute('data-attribute');
-        document.querySelector('#add-id').value = this.getAttribute('data-id');
-        document.querySelector('#add-type').value = this.getAttribute('data-type');
-        // alert('1');
-      })
-    }
-    var as = document.querySelectorAll('.icon');
-    for (var i of as) {
-      i.addEventListener('click', function (e) {
-        // 在modal中填充数据
-        document.querySelector('#edit-name').innerText = this.getAttribute('data-attribute');
-        document.querySelector('#edit-id').value = this.getAttribute('data-id');
-        document.querySelector('#edit-type').value = this.getAttribute('data-type');
-        document.querySelector('#edit-price').value = this.getAttribute('data-price');
-        // e.stopPropagation();
-      })
-    }
-
-    var month = document.querySelector('#selectMonth');
-    month.addEventListener('change', function (e) {
-      // 当时间改变后，重新刷新页面
-      window.location.href = '/admin/payment?date='+this.value
-    })
-  </script>
+    
 </body>
 
 </html>

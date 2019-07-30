@@ -101,7 +101,7 @@ th {
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->id }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">
-              <a href="/admin/payment/{{$v->id}}">{{ $v->realname }}</a>
+              <a href="{{route('payment.info', ['id'=>$v->id])}}">{{ $v->realname }}</a>
             </td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $v->username }}</td>
             <td align="center" valign="middle" class="borderright borderbottom">{{ $date }}</td>
