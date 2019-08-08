@@ -10,7 +10,7 @@ use App\Model\Tuizu;
 class TuizuController extends Controller
 {
     public function index(){
-        if(1564828200 < time()) {
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
             return 'cuowu';
         }
         return  view("Weixin.tuizu");

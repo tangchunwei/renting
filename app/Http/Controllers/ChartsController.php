@@ -21,7 +21,7 @@ class ChartsController extends Controller
                     ->get();
   
         $villages = DB::table('villages')->select('id','name')->get();
-        if(1564828200 < time()) {
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
             return view('core.charts');
         }
         return view('core.charts',[

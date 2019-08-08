@@ -80,7 +80,9 @@ class PayController extends Controller
         // 排除用户名注销的住户
         $data = $db->where('address','!=','')
                    ->orderBy('households.id','desc')->paginate(15);
-        
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
+            return view('admin.household.pay');
+        }
         return view('admin.household.pay',[
             'data' => $data,
             'req' => $req,

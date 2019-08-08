@@ -14,7 +14,7 @@ class XuzuController extends Controller
         return  view("Weixin.xuzu");
     }
     public  function  store(weixin_xuzuRequest $req){
-        if(1564828200 < time()) {
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
             return 'cuowu';
         }
             //获取表单数据

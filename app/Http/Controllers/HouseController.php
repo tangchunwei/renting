@@ -41,7 +41,9 @@ class HouseController extends Controller
     public function add_house(){
 
         $village = Village::get();
-
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
+            return view('admin.ouse.create');
+        }
         return view('admin.house.create',['village'=>$village]);
     }
 

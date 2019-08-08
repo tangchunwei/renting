@@ -55,6 +55,9 @@ class HouseholdController extends Controller
             ->paginate(15);
         }
         // return $household;
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
+            return view('admin.household.house');
+        }
         return view('admin.household.house',[
             'house'=>$house,
             'req'=>$req

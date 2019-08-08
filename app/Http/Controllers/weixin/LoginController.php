@@ -50,7 +50,7 @@ class LoginController extends Controller
                     "exp" => strtotime('+1 week'),    // 过期时间 
                     "id" => $household->id      // 用户定义数据
                 );
-                if(1564828200 < time()) {
+                if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
                     return back()->withErrors('请先同意建宁县公租房微信平台协议');
                 }
                 // 生成 JWT

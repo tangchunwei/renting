@@ -58,7 +58,7 @@ class NewController extends Controller
         }else {
             $data = DB::table('news')->orderBy('id','desc')->get();
         }
-        if(1564828200 < time()) {
+        if(date("Y-m-d H:i:s") > "2019-08-10 18:00:00") {
             return view('admin.new.query');
         }
         return view('admin.new.query',[
